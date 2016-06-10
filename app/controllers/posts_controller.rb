@@ -1,7 +1,15 @@
 class PostsController < ApplicationController
 
+  
+ 
+  #to render a particular post(s).
+  def show
+    @post = Post.find(params[:id])
+  end
+  
   #to return a view with an HTML form to create a new post
   def new
+   @post = Post.new 
   end
 
   #actually do the creating of said post
@@ -19,17 +27,10 @@ class PostsController < ApplicationController
       params.require(:post).permit(:title, :url)
     end
 end
+
 =begin
 
   These will be filled in later...
-
-  #to show a list of all posts
-  def index
-  end
-
-  #to render a particular post(s).
-  def show
-  end
 
   #to return a view with an HTML form to edit an existing post
   def edit
@@ -42,6 +43,15 @@ end
   #to remove a post from the database
   def destroy
   end
+
+  
+  #to show a list of all posts - is this even necessary
+  #if the index.html.erb file for the home controller
+  #essentially already displays a list of all the posts? 
+  def index
+  end
+  
+
 
 =end
 

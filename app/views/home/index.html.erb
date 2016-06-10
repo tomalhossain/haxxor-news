@@ -1,11 +1,9 @@
 <main id="content">
-  <ol id="links-list">
+  <ol id="posts-list">
     <%= @posts.each do |post| %>
       <li>
-        <span class="posts-list">
-          <%= link_to link.title, link.url %>
-        </span>
+          <%= link_to post.title, post.url %>
       </li>
-    <%= end %>
+    <% end %>
   </ol>
 </main>
