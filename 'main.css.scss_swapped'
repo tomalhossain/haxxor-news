@@ -33,10 +33,10 @@
 }
 
 .details a {
-  padding: 0.3em;
+  //padding: 0.3em;
 }
 
-#posts-list li {
+#links-list li {
   padding: 0.5em;
   a {
     color: #4DB4D6;
