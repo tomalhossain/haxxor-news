@@ -1,11 +1,3 @@
-/* mixins, variables, etc. */
-
-@mixin box_sizing {
-  -moz-box-sizing: border-box; 
-  -webkit-box-sizing: border-box;
-  box-sizing: border box; 
-}
-
 .navbar {
   background-color: #4DB4D6;
   width: 100%;
@@ -41,7 +33,7 @@
 }
 
 .details a {
-  padding: 0.3em;
+  //padding: 0.3em;
 }
 
 #links-list li {
@@ -49,14 +41,4 @@
   a {
     color: #4DB4D6;
   }
-}
-
-/* miscellaneous */
-
-.debug_dump {
-  clear: both; 
-  float: left; 
-  width: 100%;
-  margin-top: 45px; 
-  @include box_sizing; 
 }

@@ -25,6 +25,7 @@ module HaxxorNews
     config.generators do |g|
       g.assets false
       g.helper false
+      g.view_specs = false
     end
 
     config.active_record.raise_in_transactional_callbacks = true
