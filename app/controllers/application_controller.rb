@@ -65,3 +65,4 @@ class ApplicationController < ActionController::Base
     session.delete(:forwarding_url)
   end 
 end
+
