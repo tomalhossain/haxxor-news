@@ -1,11 +1,3 @@
-/* mixins, variables, etc. */
-
-@mixin box_sizing {
-  -moz-box-sizing: border-box; 
-  -webkit-box-sizing: border-box;
-  box-sizing: border box; 
-}
-
 .navbar {
   background-color: #4DB4D6;
   width: 100%;
@@ -26,12 +18,12 @@
   }
 }
 
-.auth {
-  float: right;
-}
-
 .links {
   float: left;
+ }
+
+.auth {
+  float: right;
 }
 
 #wrapper {
@@ -41,22 +33,12 @@
 }
 
 .details a {
-  padding: 0.3em;
+  //padding: 0.3em;
 }
 
-#posts-list li {
+#links-list li {
   padding: 0.5em;
   a {
     color: #4DB4D6;
   }
-}
-
-/* miscellaneous */
-
-.debug_dump {
-  clear: both; 
-  float: left; 
-  width: 100%;
-  margin-top: 45px; 
-  @include box_sizing; 
 }
