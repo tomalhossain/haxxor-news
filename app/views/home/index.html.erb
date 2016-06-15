@@ -1,6 +1,6 @@
 <main id="content">
   <ol id="posts-list">
-    <%= @posts.each do |post| %>
+    <% @posts.each do |post| %>
       <li>
           <%= link_to post.title, post.url %>
       </li>
