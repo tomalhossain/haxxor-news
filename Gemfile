@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+# Puma to replace the default WEBrick server
+gem 'puma' 
+# Allow for user authentication 
 gem 'bcrypt' 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
