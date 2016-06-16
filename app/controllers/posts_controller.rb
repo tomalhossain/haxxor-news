@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :logged_in_user, only: [:create]
 
   def show
     @post = Post.find(params[:id])
@@ -9,7 +10,8 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
+    current_user
+    @post = @current_user.posts.build(post_params)
     if @post.save
       redirect_to root_path
     else

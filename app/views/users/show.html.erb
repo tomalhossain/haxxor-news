@@ -3,4 +3,16 @@
   <%= gravatar_for @user %>
   <%= @user.name %>
 </h1>
-
+<% if @user.posts.any? %> 
+	<h3> Posts (<%= @user.posts.count %>)</h3>
+	  <ol> 
+		  <% @user.posts.each do |post| %> 
+        <li> 
+          <%= link_to post.title, post.url %> 
+          <br>
+          Posted <%= time_ago_in_words(post.created_at) %> ago.
+        </li>
+      <% end %> 
+	  </ol>
+	<% will_paginate @posts %> 
+<% end %> 

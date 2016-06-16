@@ -1,7 +1,12 @@
 class UsersController < ApplicationController
 
+  def index
+      @users = User.paginate(page: params[:page], per_page: 20)
+  end 
+
   def show
     @user = User.find(params[:id])
+    @posts = @user.posts.paginate(page: params[:page], per_page: 20)
   end
 
   def new
@@ -12,7 +17,6 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       log_in @user
-      current_user
       flash[:success] = "Welcome to the Sample App!" 
       redirect_to user_url(@user) 
     else
