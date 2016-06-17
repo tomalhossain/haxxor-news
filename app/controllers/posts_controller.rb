@@ -10,8 +10,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    current_user
-    @post = @current_user.posts.build(post_params)
+    @post = current_user.posts.build(post_params)
     if @post.save
       redirect_to root_path
     else
@@ -24,22 +23,4 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:title, :url)
   end
-
-=begin
-
-Actions for future tasks
-
-  def edit
-  end
-
-  def update
-  end
-
-  def destroy
-  end
-
-=end
-
 end
-
-

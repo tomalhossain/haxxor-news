@@ -9,8 +9,8 @@
 end
 
 users = User.order(:created_at).take(6)
-10.times do 
+10.times do
   title = Faker::Lorem.sentence(5)
   url = "http://tomalhossain.github.io/"
-  users.each { |user| user.posts.create!(title: title, url: url) } 
-end 
+  users.each { |user| user.posts.create!(title: title, url: url) }
+end

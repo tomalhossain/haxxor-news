@@ -1,16 +1,14 @@
 <main id="content">
   <%= will_paginate @posts %> 
-  
   <ol id="posts-list">
     <% @posts.each do |post| %>
-      <%= link_to gravatar_for(post.user), post.user %>
       <li>
           <%= link_to post.title, post.url %>
           <br>
-          Posted <%= time_ago_in_words(post.created_at) %> ago. 
+          Posted by <%= link_to post.user.name, post.user %>  
+          <%= time_ago_in_words(post.created_at) %> ago. 
       </li>
     <% end %>
   </ol>
-  
   <%= will_paginate @posts %> 
 </main>
