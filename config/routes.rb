@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:new, :create, :show, :index]
   resources :posts, only: [:new, :create, :show]
+  resources :account_activations, only: [:edit]
 
   get 'signup' => 'users#new'
   get 'users' => 'users#index'
