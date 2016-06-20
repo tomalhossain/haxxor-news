@@ -40,8 +40,27 @@ class ApplicationController < ActionController::Base
 
   def logged_in_user
     unless logged_in?
-      flash[:danger] = "You must log in in order to submit a post."
+      store_location
+      flash[:danger] = "You must login to complete that action."
       redirect_to login_url
     end
   end
+
+  def current_user?(user)
+    user == current_user
+  end 
+
+  def correct_user
+    @user = User.find(params[:id])
+    redirect_to(root_url) unless current_user?(@user)
+  end 
+
+  def store_location
+    session[:forwarding_url] = request.url if request.get?
+  end 
+
+  def redirect_back_or(default)
+    redirect_to(session[:forwarding_url] || default)
+    session.delete(:forwarding_url)
+  end 
 end

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   root 'home#index'
 
-  resources :users, only: [:new, :create, :show, :index]
+  resources :users, only: [:new, :create, :show, :index, :edit, :update]
   resources :posts, only: [:new, :create, :show]
   resources :account_activations, only: [:edit]
 
