@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   
-  attr_accessor :remember_token
+  attr_accessor :remember_token, :activation_token 
 
   before_save :downcase_email
   before_create :create_activation_digest
@@ -25,9 +25,10 @@ class User < ActiveRecord::Base
     BCrypt::Password.create(string, cost: cost)
   end 
 
-  def authenticated?(remember_token)
-    return false if remember_digest.nil? 
-    BCrypt::Password.new(remember_digest).is_password?(remember_token)
+  def authenticated?(attribute, token)
+    digest = send("#{attribute}_digest")
+    return false if digest.nil? 
+    BCrypt::Password.new(digest).is_password?(token)
   end 
 
   def remember
@@ -46,7 +47,7 @@ class User < ActiveRecord::Base
   end 
 
   def create_activation_digest
-    self.activation.token = User.new_token
+    self.activation_token = User.new_token
     self.activation_digest = User.digest(activation_token)
   end 
 end

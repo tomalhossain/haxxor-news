@@ -1,3 +1,5 @@
-UserMailer#accont_activation
+Hi <%= @user.name %>,
 
-<%= @greeting %>, find me in app/views/user_mailer/accont_activation.text.erb
+Congrats on choosing Haxxor-News - you rock. Click on the link below to activate your account:
+
+<%= edit_account_activation_url(@user.activation_token, email: @user.email) %>
