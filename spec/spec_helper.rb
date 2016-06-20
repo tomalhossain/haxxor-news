@@ -40,6 +40,9 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
+  require 'capybara/rspec'
+  #require_relative '../../app/models/user.rb'
+
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
 =begin

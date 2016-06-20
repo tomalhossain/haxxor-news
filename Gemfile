@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 gem 'htmlbeautifier'
 gem 'bcrypt'
-gem 'faker'
 gem 'simple_form'
 gem 'will_paginate'
 gem 'rails', '4.2.6'
@@ -18,16 +17,23 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 group :development, :test do
   gem 'byebug'
   gem 'rspec-rails'
+  gem 'factory_girl_rails' 
 end
 
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
+  gem 'pry'
 end
 
 group :production do
   gem 'puma' 
 end 
 
-
-
+group :test do
+  gem 'database_cleaner' 
+  gem 'faker'
+  gem 'capybara'
+  gem 'launchy'
+  gem 'guard-rspec'
+end 
