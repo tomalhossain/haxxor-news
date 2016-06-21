@@ -14,7 +14,6 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
-gem 'puma' 
 
 group :development, :test do
   gem 'byebug'
@@ -25,6 +24,9 @@ group :development do
   gem 'spring'
 end
 
+group :production do
+  gem 'puma' 
+end 
 
 
 
