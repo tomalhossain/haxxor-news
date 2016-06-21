@@ -40,6 +40,15 @@ class User < ActiveRecord::Base
     update_attribute(:remember_digest, nil)
   end 
 
+  def activate 
+    update_attribute(:activated, true)
+    update_attribute(:activate_at, Time.zone.now)
+  end 
+
+  def send_activation_email
+    UserMailer.account_activation(self).deliver_now
+  end 
+
   private 
 
   def downcase_email
@@ -50,4 +59,6 @@ class User < ActiveRecord::Base
     self.activation_token = User.new_token
     self.activation_digest = User.digest(activation_token)
   end 
+
+
 end
