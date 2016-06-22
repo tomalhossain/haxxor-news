@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 
   def log_in(user)
     session[:user_id] = user.id
+    @current_user = user
   end
 
   def log_out
@@ -26,7 +27,6 @@ class ApplicationController < ActionController::Base
       user = User.find_by(id: user_id)
       if user && user.authenticated?(:remember, cookies[:remember_token])
         log_in user
-        @current_user = user
       end 
     end 
   end
