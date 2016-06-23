@@ -12,7 +12,7 @@ class CreateUserService
                                 reset_token: reset_token, 
                                 reset_digest: digest(reset_token) })     
       UserMailer.account_activation(@user).deliver_now
-      sucess = true 
+      true 
     else 
       success = false
     end 
