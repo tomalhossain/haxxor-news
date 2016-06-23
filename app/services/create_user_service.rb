@@ -5,12 +5,10 @@ class CreateUserService
 
   def call
     if @user.save
-      activation_token = new_token
-      reset_token = new_token
-      @user.update_attributes({ activation_token: activation_token, 
-                                activation_digest: digest(activation_token),
-                                reset_token: reset_token, 
-                                reset_digest: digest(reset_token) })     
+      token = SecureRandom.urlsafe_base64
+      @user.update_attributes({ activation_token: token, 
+                                activation_digest: digest(token)
+      })     
       UserMailer.account_activation(@user).deliver_now
       true 
     else 
@@ -25,7 +23,6 @@ class CreateUserService
   private 
 
   def new_token
-    SecureRandom.urlsafe_base64
   end
 
   def digest(raw_password)
