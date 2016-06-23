@@ -18,19 +18,6 @@ class ApplicationController < ActionController::Base
     cookies.delete(:remember_token)
   end 
 
-
-  helper_method :current_user
-  def current_user
-    if (user_id = session[:user_id])
-      @current_user ||= User.find_by(id: user_id)
-    elsif (user_id = cookies.signed[:user_id])
-      user = User.find_by(id: user_id)
-      if user && user.authenticated?(:remember, cookies[:remember_token])
-        log_in user
-      end 
-    end 
-  end
-
   helper_method :logged_in? 
   def logged_in?
     current_user.present?
@@ -46,10 +33,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  helper_method :current_user?
-  def current_user?(user)
-    user == current_user
-  end 
+  helper_method :current_user
+  def current_user
+    user_id = session[:user_id] || cookies.signed[:user_id]
+    @current_user ||= User.find_by(id: user_id) if user_id 
+  end
 
   def correct_user
     @user = User.find(params[:id])

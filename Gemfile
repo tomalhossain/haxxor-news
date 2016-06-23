@@ -18,6 +18,7 @@ group :development, :test do
   gem 'byebug'
   gem 'factory_girl_rails' 
   gem 'pry'
+  gem 'pry-doc'
 end
 
 group :development do
