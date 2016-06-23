@@ -7,7 +7,11 @@
 		<li>
 			<%= gravatar_for user %> 
 			<%= link_to user.name, user %> 
+<<<<<<< bf72d7571f74e7046221dd1d124ef59974607202
       <% if current_user.admin? && current_user !== user) %>
+=======
+      <% if current_user.admin? && current_user != user %>
+>>>>>>> Password resets are currently functional and classes have been refactored.
         <br>
         <%= link_to "delete", user, method: :delete, 
                               data: { confirm: "Are you Sure?" } %>

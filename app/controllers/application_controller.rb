@@ -18,6 +18,7 @@ class ApplicationController < ActionController::Base
     cookies.delete(:remember_token)
   end 
 
+
   helper_method :logged_in? 
   def logged_in?
     current_user.present?

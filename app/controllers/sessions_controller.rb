@@ -1,6 +1,10 @@
 class SessionsController < ApplicationController
 
   def new
+    if logged_in?
+      redirect_to root_url 
+      flash[:message] = "You are already logged in." 
+    end 
   end
 
   def create
@@ -13,14 +17,14 @@ class SessionsController < ApplicationController
         end 
         redirect_back_or user
       else
-        flash[:warning] = 'Account not activated. Check your email for 
+        flash[:danger] = 'Account not activated. Check your email for 
         the activation link.'
-        redirect_to root_url 
+        redirect_to root_url
       end 
-    else
-      flash.now[:danger] = 'Invalid email/password combination'
-      render 'new'
-    end
+    else 
+      flash[:danger] = 'Your email/password combination was invalid.'
+      redirect_to login_path 
+    end 
   end
 
   def remember(user) 
