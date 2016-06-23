@@ -5,18 +5,21 @@ class CreateUserService
 
   def call
     if @user.save
-      token = new_token
-      @user.update_attributes({ activation_token: token, 
-                                 activation_digest: digest(token) })     
-      UserMailer.account_activatserion(@user).deliver_now
-      @sucess = true 
+      activation_token = new_token
+      reset_token = new_token
+      @user.update_attributes({ activation_token: activation_token, 
+                                activation_digest: digest(activation_token),
+                                reset_token: reset_token, 
+                                reset_digest: digest(reset_token) })     
+      UserMailer.account_activation(@user).deliver_now
+      sucess = true 
     else 
-      @success = false
+      success = false
     end 
   end
 
-  def success?
-    @success
+  def get_user
+    @user
   end 
 
   private 
