@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   before_save :downcase_email
 
   has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy 
   has_secure_password
 
   validates :name, presence: true, length: { maximum: 50 }

@@ -1,3 +1,10 @@
 <main id="content">
   <%= link_to  @post.title, @post.url %>
+  <% if @post.comments.any? %>
+    <h3> Comments </h3>
+    <ol>
+      <%= render @comments %> 
+    </ol>
+    <%= will_paginate @comments %> 
+  <% end %> 
 </main>  
