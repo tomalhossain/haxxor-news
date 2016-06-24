@@ -1,13 +1,13 @@
 class PostsController < ApplicationController
   before_action :logged_in_user, only: [:create]
 
-  def show
-    @post = Post.find(params[:id])
-    @comments = @post.comments.paginate(page: params[:page])
-  end
-
   def new
     @post = Post.new
+  end
+
+  def show
+    @post = Post.find(params[:id])
+    @comments = @post.comments.paginate(page: params[:page], per_page: 20)
   end
 
   def create
