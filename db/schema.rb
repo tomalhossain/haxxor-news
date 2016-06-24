@@ -11,21 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160624172005) do
+ActiveRecord::Schema.define(version: 20160624220218) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "comments", force: :cascade do |t|
     t.text     "content"
-    t.integer  "post_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "commentable_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.string   "user_id"
+    t.string   "commentable_type"
   end
 
-  add_index "comments", ["post_id", "created_at"], name: "index_comments_on_post_id_and_created_at", using: :btree
-  add_index "comments", ["post_id"], name: "index_comments_on_post_id", using: :btree
+  add_index "comments", ["commentable_id", "created_at"], name: "index_comments_on_commentable_id_and_created_at", using: :btree
+  add_index "comments", ["commentable_id"], name: "index_comments_on_commentable_id", using: :btree
 
   create_table "posts", force: :cascade do |t|
     t.string   "title",      null: false
@@ -52,5 +53,5 @@ ActiveRecord::Schema.define(version: 20160624172005) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
-  add_foreign_key "comments", "posts"
+  add_foreign_key "comments", "posts", column: "commentable_id"
 end

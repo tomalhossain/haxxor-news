@@ -2,15 +2,19 @@
 
 <%= will_paginate %> 
 
-<ul> 
+<ul style="list-style-type: none">
 	<% @users.each do |user| %> 
 		<li>
-			<%= gravatar_for user %> 
 			<%= link_to user.name, user %> 
+      <br> 
+      <br>
+      <%= gravatar_for user %> 
+      <br>
       <% if current_user.admin? && current_user != user %>
-        <br>
+        <br> 
         <%= link_to "delete", user, method: :delete, 
                               data: { confirm: "Are you Sure?" } %>
+      <hr>
       <% end %> 
 		</li>
 	<% end %> 

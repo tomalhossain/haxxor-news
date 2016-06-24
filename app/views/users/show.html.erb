@@ -9,8 +9,11 @@
         <li> 
           <%= link_to post.title, post.url %> 
           <br>
+          <br>
           Posted <%= time_ago_in_words(post.created_at) %> ago.
         </li>
+        <%= link_to "comments", post_path(post.id) %>
+        <hr>
       <% end %> 
 	  </ol>
 	<% will_paginate @posts %> 

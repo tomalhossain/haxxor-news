@@ -5,11 +5,13 @@
       <li>
           <%= link_to post.title, post.url %>
           <br>
+          <br>
           Posted by <%= link_to post.user.name, post.user %>  
           <%= time_ago_in_words(post.created_at) %> ago.
           <br>
           <%= link_to "comments", post_path(post.id) %> 
       </li>
+      <hr>
     <% end %>
   </ol>
   <%= will_paginate @posts %> 
