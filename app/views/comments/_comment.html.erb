@@ -1,7 +1,7 @@
 <li>  
   <%= comment.content %> 
   <br> 
-  <% user = User.find_by(id: comment.commentable_id) %> 
+  <% user = User.find_by(id: comment.user_id) %> 
   by 
   <%= link_to user.name, user %> 
   <%= time_ago_in_words(comment.created_at) %> ago. 
