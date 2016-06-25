@@ -9,7 +9,6 @@
   <%= form_for :comment, url: comments_path do |f| %>
     <%= f.text_area :content, cols: 60, rows: 10  %> 
     <%= hidden_field_tag :post_id, @post.id %> 
-    
     <%= f.submit "Add a comment" %> 
   <% end %> 
 
@@ -18,16 +17,51 @@
     <ul style="list-style-type: none">
       <%= will_paginate @comments %> 
       <% @comments.each do |comment| %>
-        <% @user = User.find_by(id: comment.user_id) %> 
+        <% comment_user = User.find_by(id: comment.user_id) %> 
         <li>  
           <%= comment.content %> 
           <br> 
-          Commented by 
-          <%= link_to @user.name, @user %> 
+          by 
+          <%= link_to comment_user.name, comment_user %> 
           <%= time_ago_in_words(comment.created_at) %> ago. 
           <br>
+          <br>
+          <%= form_for :comment, url: comments_path do |f| %>
+            <%= f.text_field :content %> 
+            <%= hidden_field_tag :comment_id, comment.id %> 
+            <%= hidden_field_tag :post_id, @post.id %> 
+            <%= f.submit "Reply" %>
+          <% end %>  
+          
           <br> 
-          <%# form_for () %> 
+          <% if comment.comments.any? %> 
+            <% replies = comment.comments.paginate(page: params[:page], per_page: 20) %>
+            <div style="margin-left: 5em">
+            <ul style="list-style-type: none">
+            <%= will_paginate replies %> 
+            <% replies.each do |reply| %>
+              <% reply_user = User.find_by(id: comment.user_id) %> 
+              <li>  
+                <%= reply.content %> 
+                <br> 
+                by 
+                <%= link_to reply_user.name, reply_user %> 
+                <%= time_ago_in_words(reply.created_at) %> ago. 
+                <br> 
+              </li>
+              <br>
+              <%= form_for :comment, url: comments_path do |f| %>
+              <%= f.text_field :content %> 
+              <%= hidden_field_tag :comment_id, comment.id %> 
+              <%= hidden_field_tag :post_id, @post.id %> 
+              <%= f.submit "Reply" %> 
+            <% end %> 
+              ________________________________
+            <% end %> 
+            </ul>
+            <br>
+            </div>
+          <% end %>  
           <hr>
           </li>  
         </li>
