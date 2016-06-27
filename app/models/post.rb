@@ -5,5 +5,3 @@ class Post < ActiveRecord::Base
   validates :url, presence: true
   default_scope -> { order(created_at: :desc) }
 end
-
-
