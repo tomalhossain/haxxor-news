@@ -5,7 +5,7 @@ class CreateUserService
 
   def call
     if @user.save
-      token = SecureRandom.urlsafe_base64
+      token = CreateUserService.new_token 
       @user.update_attributes({ activation_token: token, 
                                 activation_digest: digest(token)
       })     
@@ -20,15 +20,15 @@ class CreateUserService
     @user
   end 
 
-  private 
-
-  def new_token
-  end
-
-  def digest(raw_password)
+  def CreateUserService.digest(token)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
                                                   BCrypt::Engine.cost
-    BCrypt::Password.create(raw_password, cost: cost)
+    BCrypt::Password.create(token, cost: cost)
+  end
+
+  def CreateUserService.new_token 
+    SecureRandom.urlsafe_base64
   end 
+
 end 
 

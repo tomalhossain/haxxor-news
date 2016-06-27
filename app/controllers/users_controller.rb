@@ -19,12 +19,12 @@ class UsersController < ApplicationController
 
   def create
     service = CreateUserService.new(user_params)
+    @user = service.get_user
     success = service.call
     if success
+      redirect_to root_url      
       flash[:info] = "Please check your email to activate your account."
-      redirect_to root_url
     else
-      @user = service.get_user
       render 'new'
     end
   end
@@ -36,7 +36,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
-      flash[:success] = "Profile updated"
+      flash[:success] = "Profile updated!"
       redirect_to @user
     else
       render 'edit'

@@ -24,6 +24,7 @@ class ApplicationController < ActionController::Base
     current_user.present?
   end
 
+  
   private
 
   def logged_in_user
@@ -42,7 +43,9 @@ class ApplicationController < ActionController::Base
 
   def correct_user
     @user = User.find(params[:id])
-    redirect_to(root_url) unless current_user?(@user)
+    if current_user != @user
+      redirect_to(root_url) 
+    end 
   end 
 
   def store_location
