@@ -1,16 +1,23 @@
 require 'spec_helper'
 
-RSpec.describe User, :type => :model do
-  it "has a valid factory" do
-    expect(create :user).to be_valid 
+RSpec.describe User, type: :model do
+  
+  describe '#factory' do 
+    it "has a valid factory" do
+      expect(create :user).to be_valid 
+    end 
   end 
 
-  it { is_expected.to validate_presence_of(:email) }
+  describe '#email' do 
+    it { is_expected.to validate_presence_of(:email) }
+
+
+  end 
 
 
 
-  it "is invalid without a name"
-  it "is invalid without an email"
+  #it "is invalid without a name"
+  #it "is invalid without an email"
 
 end 
 
