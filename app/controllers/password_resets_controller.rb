@@ -31,12 +31,10 @@ class PasswordResetsController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if valid_params?
-      if @user.update_attributes(user_params)
+    if valid_params? && @user.update_attributes(user_params)
         flash[:success] = "Your password has been successfully reset!"
         log_in(@user)
-        redirect_to @user
-      end 
+        redirect_to @user 
     else
         flash[:danger] = "You must enter a valid password and confirmation."
         render 'edit'
