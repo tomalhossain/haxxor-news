@@ -1,6 +1,7 @@
 FactoryGirl.define do
+  
   factory :comment do
-    content "MyText"
-    post nil
+    content "This is a sample comment."
   end
+
 end
