@@ -2,20 +2,21 @@
   <br>
  <%= link_to @post.title, @post.url %>
   <br>
-    Posted by <%= link_to @post.user.name, @post.user %>  
+    Posted by <%= link_to @post.user.name, @post.user %>
     <%= time_ago_in_words(@post.created_at) %> ago.
-  <br> 
+  <br>
   <br>
   <%= form_for :comment, url: comments_path do |f| %>
-    <%= f.text_area :content, placeholder: "Add a comment", cols: 60, rows: 10  %> 
-    <%= hidden_field_tag :post_id, @post.id %> 
-    <%= f.submit "Comment" %> 
-  <% end %> 
+    <%= f.text_area :content, placeholder: "Add a comment", cols: 60, rows: 10  %>
+    <%= f.hidden_field :post_id, value: @post.id %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.submit "Comment" %>
+  <% end %>
 
   <h3> Comments </h3>
   <% if @comments.any? %>
     <ul style="list-style-type: none">
-      <%= render partial: 'comments/comment', collection: @comments %> 
+      <%= render partial: 'comments/comment', collection: @comments %>
     </ul>
-  <% end %>  
-</main>  
+  <% end %>
+</main>

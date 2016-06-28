@@ -1,44 +1,32 @@
 class CommentsController < ApplicationController
-  
+
   before_action :logged_in_user, only: [:create]
 
   def new
   end
 
   def create
-    @parent_post = Post.find(params[:post_id])
+    post = Post.find(params[:comment][:post_id])
 
-    if params[:comment_id].present?
-      parent_comment = Comment.find(params[:comment_id])
-      new_comment = parent_comment.comments.build(comment_params)
-      if new_comment.valid? 
-        new_comment.update_attributes(commentable_type: "Comment")
-        create_comment new_comment
-      else 
-        redirect_to @parent_post
-        flash[:danger] = "Your comment may not be empty."
-      end 
+    if params[:comment][:comment_id].present?
+      parent = Comment.find(params[:comment][:comment_id])
     else
-      new_comment = @parent_post.comments.build(comment_params)
-      if new_comment.valid? 
-        new_comment.update_attributes(commentable_type: "Post")
-        create_comment new_comment
-      else 
-        redirect_to @parent_post
-        flash[:danger] = "Your comment may not be empty."
-      end 
+      parent = post
     end
+
+    comment = parent.comments.build
+
+    if (comment.update_attributes(comment_params))
+      comment.save
+    else
+      flash[:danger] = "Your comment may not be empty."
+    end
+    redirect_to post
+
   end
 
   def comment_params
-    params.require(:comment).permit(:content)
+    params.require(:comment).permit(:content, :user_id)
   end
 
-  private
-
-  def create_comment(new_comment)
-    new_comment.update_attributes(user_id: current_user.id)
-    new_comment.save
-    redirect_to @parent_post
-  end
 end

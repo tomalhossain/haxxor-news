@@ -1,7 +1,9 @@
 require 'rails_helper'
+require 'capybara/rspec'
+
 
 RSpec.configure do |config|
-  config.include FactoryGirl::Syntax::Methods 
+  config.include FactoryGirl::Syntax::Methods
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
   end
@@ -9,6 +11,4 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
-  require 'capybara/rspec'
-  
 end
