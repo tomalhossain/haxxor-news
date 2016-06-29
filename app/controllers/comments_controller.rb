@@ -23,5 +23,4 @@ class CommentsController < ApplicationController
       @post
     end
   end
-
 end

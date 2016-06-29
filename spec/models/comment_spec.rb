@@ -1,13 +1,13 @@
-require 'rails_helper'
+require 'spec_helper'
 
-RSpec.describe Comment, type: :model do 
+RSpec.describe Comment, type: :model do
 
   it "has a valid factory" do
     expect(create :comment).to be_valid
-  end  
+  end
 
-  describe '#content' do 
+  describe '#content' do
     it { is_expected.to validate_presence_of(:content) }
-  end 
-  
-end 
+  end
+
+end

@@ -9,9 +9,6 @@ module Features
   end
 end
 
-RSpec.configure do |config|
-  config.include Features::PostHelpers, type: :feature
-end
 
 
 

@@ -1,9 +1,11 @@
 require 'rails_helper'
 require 'capybara/rspec'
 
-
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
+  config.include Features::SessionHelpers, type: :feature
+  config.include Features::PostHelpers, type: :feature
+  config.include Features::SessionHelpers, type: :controller
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
   end
