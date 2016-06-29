@@ -1,18 +1,18 @@
 <main id="content">
-  <%= will_paginate @posts %> 
+  <%= will_paginate @posts %>
   <ol id="posts-list">
     <% @posts.each do |post| %>
       <li>
           <%= link_to post.title, post.url %>
           <br>
           <br>
-          Posted by <%= link_to post.user.name, post.user %>  
+          Posted by <%= link_to post.user.name, post.user %>
           <%= time_ago_in_words(post.created_at) %> ago.
           <br>
-          <%= link_to "comments", post_path(post.id) %> 
+          <%= link_to pluralize(post.comments.count, 'comment'), post_path(post.id) %>
       </li>
       <hr>
     <% end %>
   </ol>
-  <%= will_paginate @posts %> 
+  <%= will_paginate @posts %>
 </main>

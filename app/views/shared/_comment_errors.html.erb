@@ -1,0 +1,8 @@
+<% if comment.errors.any? %>
+  The form contains <%= pluralize(comment.errors.count, "error") %>.
+  <ul>
+    <% comment.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
