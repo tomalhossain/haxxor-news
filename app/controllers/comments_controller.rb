@@ -9,9 +9,7 @@ class CommentsController < ApplicationController
       parent = post
     end
     comment = parent.comments.build
-    if (comment.update_attributes(comment_params))
-      comment.save
-    else
+    if !comment.update_attributes(comment_params)
       flash[:danger] = "Comment may not be empty."
     end
     redirect_to post
