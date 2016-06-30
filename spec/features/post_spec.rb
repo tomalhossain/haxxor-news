@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "Post" do
 
-  let(:user) { FactoryGirl.create :user }
+  let!(:user) { create :user }
 
   context "when not logged in" do
     it "redirects to login path" do
@@ -13,7 +13,8 @@ describe "Post" do
 
   context "when logged in" do
     it "successfully creates a post" do
-      login(:user)
+
+      log_in(user)
       create_post("Tomal's Blog", "http://tomalhossain.github.io/")
       expect(page).to have_content("Tomal's Blog")
     end

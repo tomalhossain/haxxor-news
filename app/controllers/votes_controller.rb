@@ -6,10 +6,8 @@ class VotesController < ApplicationController
     if vote.update_attributes(vote_params)
       if (params[:value] == "+1")
         votable.update_attributes(upvote_count: votable.upvote_count + 1)
-        #votable.upvote_count += 1
       else
         votable.update_attributes(downvote_count: votable.downvote_count + 1)
-        #votable.downvote_count += 1
       end
     else
       flash[:danger] = "Not a valid voting request."

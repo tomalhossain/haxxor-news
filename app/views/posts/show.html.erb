@@ -1,6 +1,6 @@
 <main id="content">
   <br>
- <%= link_to @post.title, @post.url %>
+  <%= link_to @post.title, @post.url %>
   <br>
   Posted by <%= link_to @post.user.name, @post.user %>
   <%= time_ago_in_words(@post.created_at) %> ago.
@@ -11,7 +11,17 @@
   <%= render 'vote/button', post: @post, value: "+1" %>
   <%= render 'vote/button', post: @post, value: "-1" %>
   <br>
+<<<<<<< c924c0dd53af85d71a613ac5377914895712f0d9
   <%= render partial: "shared/shared_form", locals: { commentable: @post, type: "Comment", col: 60, row: 10 } %>
+=======
+  <%= form_for @comment, url: comments_path do |f| %>
+    <%= render 'shared/comment_errors', comment: @comment %>
+    <%= f.text_area :content, placeholder: "Add a comment", cols: 60, rows: 10  %>
+    <%= f.hidden_field :post_id, value: @post.id %>
+    <%= f.submit "Comment" %>
+  <% end %>
+
+>>>>>>> Comments controller and spec stuff.
   <h3> Comments </h3>
   <% if @comments.any? %>
     <ul style="list-style-type: none">

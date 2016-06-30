@@ -1,6 +1,5 @@
 module Features
   module SessionHelpers
-
     def sign_up(name, email, password, password_confirmation)
       visit(new_user_path)
       fill_in('Name', with: name)
