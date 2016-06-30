@@ -7,7 +7,6 @@ class VotesController < ApplicationController
       if (params[:value] == "+1")
         votable.update_attributes(upvote_count: votable.upvote_count + 1)
         #votable.upvote_count += 1
-
       else
         votable.update_attributes(downvote_count: votable.downvote_count + 1)
         #votable.downvote_count += 1
@@ -15,14 +14,20 @@ class VotesController < ApplicationController
     else
       flash[:danger] = "Not a valid voting request."
     end
-    #redirect_to params[:redir_path]
-    redirect_to root_url
+    redirect_path
   end
 
   def destroy
   end
 
   private
+
+  def redirect_path
+
+    if params[:redir_path] == "root_url"
+      redirect_to root_url
+    end
+  end
 
   def vote_params
     params.permit(:value, :user_id, :votable_type, :votable_id)

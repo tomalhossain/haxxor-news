@@ -2,9 +2,14 @@
   <br>
  <%= link_to @post.title, @post.url %>
   <br>
-    Posted by <%= link_to @post.user.name, @post.user %>
-    <%= time_ago_in_words(@post.created_at) %> ago.
+  Posted by <%= link_to @post.user.name, @post.user %>
+  <%= time_ago_in_words(@post.created_at) %> ago.
   <br>
+  <%= pluralize(@post.upvote_count, "upvote") %>
+  <%= pluralize(@post.downvote_count, "downvote") %>
+  <br>
+  <%= render 'vote/button', post: @post, value: "+1" %>
+  <%= render 'vote/button', post: @post, value: "-1" %>
   <br>
   <%= render partial: "shared/shared_form", locals: { commentable: @post, type: "Comment", col: 60, row: 10 } %>
   <h3> Comments </h3>

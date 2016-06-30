@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts.paginate(page: params[:page], per_page: 20)
+    @posts = @user.posts.paginate(page: params[:page], per_page: 20).order('created_at DESC')
   end
 
   def new
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     @user = service.get_user
     success = service.call
     if success
-      redirect_to root_url      
+      redirect_to root_url
       flash[:info] = "Please check your email to activate your account."
     else
       render 'new'

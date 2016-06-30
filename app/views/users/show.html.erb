@@ -2,19 +2,25 @@
   <%= gravatar_for @user %>
   <%= @user.name %>
 </h1>
-<% if @user.posts.any? %> 
+<% if @user.posts.any? %>
 	<h3> Posts (<%= @user.posts.count %>)</h3>
-	  <ol> 
-		  <% @user.posts.each do |post| %> 
-        <li> 
-          <%= link_to post.title, post.url %> 
+	  <ol>
+		  <% @user.posts.each do |post| %>
+        <li>
+          <%= link_to post.title, post.url %>
           <br>
           <br>
           Posted <%= time_ago_in_words(post.created_at) %> ago.
         </li>
         <%= link_to "comments", post_path(post.id) %>
+        <br>
+        <%= pluralize(post.upvote_count, "upvote") %>
+        <%= pluralize(post.downvote_count, "downvote") %>
+        <br>
+        <%= render 'vote/button', post: post, value: "+1" %>
+        <%= render 'vote/button', post: post, value: "-1" %>
         <hr>
-      <% end %> 
+      <% end %>
 	  </ol>
-	<% will_paginate @posts %> 
-<% end %> 
+	<% will_paginate @posts %>
+<% end %>
