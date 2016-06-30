@@ -6,6 +6,7 @@ class PostsController < ApplicationController
   end
 
   def show
+    session[:post_id] = params[:id]
     @post = Post.find(params[:id])
     @comments = @post.comments.order('created_at ASC')
     @comment = Comment.new
