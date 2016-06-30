@@ -7,12 +7,8 @@
   <%= time_ago_in_words(comment.created_at) %> ago.
   <br>
   <br>
-  <%= form_for @comment, url: comments_path do |f| %>
-    <%= render 'shared/comment_errors', comment: @comment %>
-    <%= f.text_area :content, placeholder: "Add a reply", cols: 30, rows: 5 %>
-    <%= f.hidden_field :comment_id, value: comment.id %>
-    <%= f.submit "Reply" %>
-  <% end %>
+  <%= render partial: 'shared/shared_form',
+             locals: { commentable: comment, type: "Reply", col: 30, row: 5 } %>
   <br>
   <hr>
   <% if comment.comments.any? %>
