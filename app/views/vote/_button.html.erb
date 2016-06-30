@@ -1,0 +1,10 @@
+<%= button_to value,
+  { controller: :votes, action: :create, remote: true ,
+    params: { value: value,
+              user_id: current_user.id,
+              votable_type: "Post",
+              votable_id: post.id,
+              redir_path: "root_url" }
+  },
+  { class: "upvote_submit" }
+%>

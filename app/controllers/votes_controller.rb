@@ -1,25 +1,21 @@
 class VotesController < ApplicationController
   def create
     @post = Post.find(params[:votable_id])
-    commentable = get_commentable
-    vote = commentable.votes.build
-
+    votable = get_votable
+    vote = votable.votes.build
     if vote.update_attributes(vote_params)
-      respond_to do |format|
-        format.html { redirect_to @upvote.post }
-        format.js # we'll use this later for AJAX!
+      if (params[:value] == "+1")
+        votable.update_attributes(upvote_count: votable.upvote_count + 1)
+        #votable.upvote_count += 1
+
+      else
+        votable.update_attributes(downvote_count: votable.downvote_count + 1)
+        #votable.downvote_count += 1
       end
-      if (params[:value] == "1")
-        commentable.update_attributes(upvote_count: commentable.upvote_count + 1)
-      #else
-        #commentable.downvote_count += 1
-      end
+    else
+      flash[:danger] = "Not a valid voting request."
     end
-
     #redirect_to params[:redir_path]
-
-    binding.pry
-
     redirect_to root_url
   end
 
@@ -32,11 +28,11 @@ class VotesController < ApplicationController
     params.permit(:value, :user_id, :votable_type, :votable_id)
   end
 
-  def get_commentable
+  def get_votable
     if params[:comment_id].present?
-      commentable = Comment.find(params[:comment_id])
+      votable = Comment.find(params[:comment_id])
     else
-      commentable = @post
+      votable = @post
     end
   end
 end

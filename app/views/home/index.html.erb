@@ -11,18 +11,12 @@
           <br>
           <%= link_to pluralize(post.comments.count, 'comment'), post_path(post.id) %>
           <br>
-          <%= pluralize(post.upvote_count, "upvotes") %>
-          <%= pluralize(post.downvote_count, "downvotes") %>
+          <%= pluralize(post.upvote_count, "upvote") %>
+          <%= pluralize(post.downvote_count, "downvote") %>
           <br>
           <% if logged_in? %>
-            <%= button_to '+1', votes_path,
-                method: :post, remote: true,
-                params: { value: 1,
-                          user_id: current_user.id,
-                          votable_type: "Post",
-                          votable_id: post.id,
-                          redir_path: "root_url"
-                        } %>
+            <%= render 'vote/button', post: post, value: "+1" %>
+            <%= render 'vote/button', post: post, value: "-1" %>
           <% end %>
       </li>
       <hr>
