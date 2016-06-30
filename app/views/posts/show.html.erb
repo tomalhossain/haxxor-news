@@ -6,7 +6,7 @@
     <%= time_ago_in_words(@post.created_at) %> ago.
   <br>
   <br>
-  <%= render partial: "shared/shared_form", locals: { record: @post, type: "Comment", col: 60, row: 10 } %>
+  <%= render partial: "shared/shared_form", locals: { commentable: @post, type: "Comment", col: 60, row: 10 } %>
   <h3> Comments </h3>
   <% if @comments.any? %>
     <ul style="list-style-type: none">
