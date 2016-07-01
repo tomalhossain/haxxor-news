@@ -2,30 +2,47 @@ class VotesController < ApplicationController
   def create
     @post = Post.find(params[:votable_id])
     votable = get_votable
-    vote = votable.votes.build
-    if vote.update_attributes(vote_params)
-      if (params[:value] == "+1")
-        votable.update_attributes(upvote_count: votable.upvote_count + 1)
+
+    if votable.votes.where(user_id: current_user.id).present?
+      vote = votable.votes.where(user_id: current_user.id).first
+      if vote.value == 1
+        if (params[:value] == "+1")
+          vote.destroy
+          votable.update_attributes(upvote_count: votable.upvote_count - 1)
+        else
+          votable.update_attributes({ upvote_count: votable.upvote_count - 1,
+                                      downvote_count: votable.downvote_count + 1 })
+          vote.update_attributes(value: -1)
+        end
       else
-        votable.update_attributes(downvote_count: votable.downvote_count + 1)
+        if (params[:value] == "-1")
+          vote.destroy
+          votable.update_attributes(downvote_count: votable.downvote_count - 1)
+        else
+          votable.update_attributes({ upvote_count: votable.upvote_count + 1,
+                                      downvote_count: votable.downvote_count - 1 })
+          vote.update_attributes(value: 1)
+        end
       end
     else
-      flash[:danger] = "Not a valid voting request."
+      vote = votable.votes.build
+      if vote.update_attributes(vote_params)
+        if (params[:value] == "+1")
+          votable.update_attributes(upvote_count: votable.upvote_count + 1)
+        else
+          votable.update_attributes(downvote_count: votable.downvote_count + 1)
+        end
+      else
+        flash[:danger] = "Not a valid voting request."
+      end
     end
-    redirect_path
+    redirect_to params[:redir_path]
   end
 
   def destroy
   end
 
   private
-
-  def redirect_path
-
-    if params[:redir_path] == "root_url"
-      redirect_to root_url
-    end
-  end
 
   def vote_params
     params.permit(:value, :votable_type, :votable_id).merge(user_id: current_user.id)

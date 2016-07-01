@@ -9,8 +9,10 @@
     <%= pluralize(comment.upvote_count, "upvote") %>
     <%= pluralize(comment.downvote_count, "downvote") %>
     <br>
-    <%= render 'vote/button', post: comment, value: "+1" %>
-    <%= render 'vote/button', post: comment, value: "-1" %>
+    <%= render partial: 'vote/button',
+               locals: { votable: comment, value: "+1", dir: post_path(@post.id) } %>
+    <%= render partial: 'vote/button',
+               locals: { votable: comment, value: "-1", dir: post_path(@post.id) } %>
   <br>
   <%= render partial: 'shared/shared_form',
              locals: { commentable: comment, type: "Reply", col: 30, row: 5 } %>

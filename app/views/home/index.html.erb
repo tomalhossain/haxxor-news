@@ -15,8 +15,10 @@
           <%= pluralize(post.downvote_count, "downvote") %>
           <br>
           <% if logged_in? %>
-            <%= render 'vote/button', post: post, value: "+1" %>
-            <%= render 'vote/button', post: post, value: "-1" %>
+            <%= render partial: 'vote/button',
+                       locals: { votable: post, value: "+1", dir: root_url } %>
+            <%= render partial: 'vote/button',
+                       locals: { votable: post, value: "-1", dir: root_url } %>
           <% end %>
       </li>
       <hr>

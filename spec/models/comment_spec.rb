@@ -2,15 +2,15 @@ require 'spec_helper'
 
 describe Comment, type: :model do
 
-  let!(:user) { build :comment }
-  let!(:post) { build :post }
-  let!(:comment_for_post) { build :comment }
+  let!(:user)               { build :user }
+  let!(:post)               { build :post }
+  let!(:comment_for_post)   { build :comment_for_post }
 
   it "has a valid factory" do
-    post_params = { title: post.title, url: post.url }
-    comment_params = { content: comment_for_post.content }
-    built_post = user.posts.build(post_params)
-    built_comment = built_post.comments.build(comment_params)
+    built_post = user.posts.build({ title: post.title, url: post.url })
+    built_post.save
+    binding.pry
+    built_comment = built_post.comments.build({ content: comment_for_post.content })
     expect(built_comment).to be_valid
   end
 
