@@ -1,9 +1,17 @@
 require 'spec_helper'
 
-RSpec.describe Comment, type: :model do
+describe Comment, type: :model do
+
+  let!(:user) { build :comment }
+  let!(:post) { build :post }
+  let!(:comment_for_post) { build :comment }
 
   it "has a valid factory" do
-    expect(create :comment).to be_valid
+    post_params = { title: post.title, url: post.url }
+    comment_params = { content: comment_for_post.content }
+    built_post = user.posts.build(post_params)
+    built_comment = built_post.comments.build(comment_params)
+    expect(built_comment).to be_valid
   end
 
   describe '#content' do
