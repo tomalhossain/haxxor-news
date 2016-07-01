@@ -28,7 +28,7 @@ class VotesController < ApplicationController
   end
 
   def vote_params
-    params.permit(:value, :user_id, :votable_type, :votable_id)
+    params.permit(:value, :votable_type, :votable_id).merge(user_id: current_user.id)
   end
 
   def get_votable
