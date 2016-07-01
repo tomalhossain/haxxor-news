@@ -14,3 +14,5 @@ users = User.order(:created_at).take(6)
   url = "http://tomalhossain.github.io/"
   users.each { |user| user.posts.create!(title: title, url: url) }
 end
+
+
