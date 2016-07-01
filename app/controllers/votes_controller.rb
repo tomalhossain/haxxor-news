@@ -39,9 +39,6 @@ class VotesController < ApplicationController
     redirect_to params[:redir_path]
   end
 
-  def destroy
-  end
-
   private
 
   def vote_params
