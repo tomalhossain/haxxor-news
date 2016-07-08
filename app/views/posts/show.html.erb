@@ -5,15 +5,19 @@
   Posted by <%= link_to @post.user.name, @post.user %>
   <%= time_ago_in_words(@post.created_at) %> ago.
   <br>
-  <%= pluralize(@post.upvote_count, "upvote") %>
-  <%= pluralize(@post.downvote_count, "downvote") %>
+  <% session[:back] = post_path(@post.id) %>
+
+  <%= render partial: 'vote/intro',
+             locals: { votable_type: "Post",
+                       votable_id: @post.id } %>
+
   <br>
-  <%= render partial: 'vote/button',
-             locals: { votable: @post, value: "+1", dir: post_path(@post.id) } %>
-  <%= render partial: 'vote/button',
-             locals: { votable: @post, value: "-1", dir: post_path(@post.id) } %>
-  <br>
-  <%= render partial: "shared/shared_form", locals: { commentable: @post, type: "Comment", col: 60, row: 10 } %>
+  <%= form_for @comment, url: comments_path do |f| %>
+    <%= render 'shared/resource_errors', resource: @comment %>
+    <%= f.text_area :content, placeholder: "Add a comment", cols: 60, rows: 10 %>
+    <%= f.hidden_field :post_id, value: @post.id %>
+    <%= f.submit "Comment" %>
+  <% end %>
   <h3> Comments </h3>
   <% if @comments.any? %>
     <ul style="list-style-type: none">

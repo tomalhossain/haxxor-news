@@ -1,18 +1,17 @@
 class VotesController < ApplicationController
   def create
-    @post = Post.find(params[:votable_id])
-    service = CreateVoteService.new(get_votable,current_user,params)
+    service = CreateVoteService.new(get_votable, current_user, params)
     service.call
-    redirect_to params[:redir_path]
+    redirect_to session[:back]
   end
 
   private
 
   def get_votable
-    if params[:comment_id].present?
-      votable = Comment.find(params[:comment_id])
+    if params[:votable_type] == "Post"
+      votable = Post.find(params[:votable_id])
     else
-      votable = @post
+      votable = Comment.find(params[:votable_id])
     end
   end
 end

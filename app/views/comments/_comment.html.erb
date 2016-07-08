@@ -6,16 +6,18 @@
   <%= link_to user.name, user %>
   <%= time_ago_in_words(comment.created_at) %> ago.
   <br>
-    <%= pluralize(comment.upvote_count, "upvote") %>
-    <%= pluralize(comment.downvote_count, "downvote") %>
-    <br>
-    <%= render partial: 'vote/button',
-               locals: { votable: comment, value: "+1", dir: post_path(@post.id) } %>
-    <%= render partial: 'vote/button',
-               locals: { votable: comment, value: "-1", dir: post_path(@post.id) } %>
+  <% session[:back] = post_path(@post.id) %>
+  <%= render partial: 'vote/intro',
+             locals: { votable_type: "Comment",
+                       votable_id: comment.id } %>
   <br>
-  <%= render partial: 'shared/shared_form',
-             locals: { commentable: comment, type: "Reply", col: 30, row: 5 } %>
+  <%= form_for @comment, url: comments_path do |f| %>
+    <%= render 'shared/resource_errors', resource: @comment %>
+    <%= f.text_area :content, placeholder: "Add a reply", cols: 30, rows: 5  %>
+    <%= f.hidden_field :comment_id, value: comment.id %>
+    <%= f.hidden_field :post_id, value: @post.id %>
+    <%= f.submit "Reply" %>
+   <% end %>
   <br>
   <hr>
   <% if comment.comments.any? %>

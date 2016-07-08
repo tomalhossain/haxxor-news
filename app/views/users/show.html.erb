@@ -14,13 +14,10 @@
         </li>
         <%= link_to "comments", post_path(post.id) %>
         <br>
-        <%= pluralize(post.upvote_count, "upvote") %>
-        <%= pluralize(post.downvote_count, "downvote") %>
-        <br>
-        <%= render partial: 'vote/button',
-                   locals: { votable: post, value: "+1", dir: user_path(@user.id) } %>
-        <%= render partial: 'vote/button',
-                   locals: { votable: post, value: "-1", dir: user_path(@user.id) } %>
+        <% session[:back] = user_path(@user.id) %>
+        <%= render partial: 'vote/intro',
+                   locals: { votable_type: "Post",
+                             votable_id: post.id } %>
         <hr>
       <% end %>
 	  </ol>

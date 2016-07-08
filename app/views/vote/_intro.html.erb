@@ -1,0 +1,19 @@
+<% if votable_type == "Post" %>
+  <% votable = Post.find(votable_id) %>
+<% else %>
+  <% votable = Comment.find(votable_id) %>
+<% end %>
+
+<%= pluralize(votable.upvote_count, "upvote") %>
+<%= pluralize(votable.downvote_count, "downvote") %>
+
+<% if logged_in? %>
+  <%= render partial: 'vote/button',
+             locals: { votable_type: votable_type,
+                       votable_id: votable_id,
+                       value: "+1" } %>
+  <%= render partial: 'vote/button',
+             locals: { votable_type: votable_type,
+                       votable_id: votable_id,
+                       value: "-1" } %>
+<% end %>
