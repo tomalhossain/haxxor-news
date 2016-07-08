@@ -38,5 +38,7 @@ RSpec.describe User, type: :model do
 
   describe '#authenticated' do
   end
+
+
 end
 

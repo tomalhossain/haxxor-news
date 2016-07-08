@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Visitor signs up' do
+describe 'Visitor' do
 
   context 'when not logged in' do
     it 'signup link should be present in navbar' do

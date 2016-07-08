@@ -1,5 +1,5 @@
-class AccountActivationsController < ApplicationController 
-  
+class AccountActivationsController < ApplicationController
+
   def edit
     user = User.find_by(email: params[:email])
     if user && !user.activated? && user.authenticated?(:activation, params[:id])
@@ -7,9 +7,9 @@ class AccountActivationsController < ApplicationController
       log_in user
       redirect_to user
       flash[:success] = "Account activated!"
-    else 
+    else
       redirect_to root_url
       flash[:danger] = "Invalid activation link"
-    end 
-  end 
-end 
+    end
+  end
+end
