@@ -25,7 +25,9 @@ describe "Visitor" do
 
   it "successfully creates a reply" do
     login(user)
+    create_comment(comment)
     create_reply(reply)
+    save_and_open_page
     expect(page).to have_content(reply)
   end
 end

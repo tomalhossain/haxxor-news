@@ -7,12 +7,8 @@ module Features
       click_on("Comment")
     end
     def create_reply(reply)
-      comment = "This is a comment"
-      create_comment(comment)
       fill_in("Add a reply", with: reply)
-      save_and_open_page
       click_on("Reply")
-      save_and_open_page
     end
   end
 end
