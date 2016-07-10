@@ -21,11 +21,5 @@ describe "Visitor" do
       create_comment(comment)
       expect(page).to have_content(comment)
     end
-
-    it "successfully creates a reply" do
-      login(user)
-      create_reply(reply)
-      expect(page).to have_content(reply)
-    end
   end
 end
