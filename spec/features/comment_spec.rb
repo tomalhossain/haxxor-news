@@ -22,4 +22,10 @@ describe "Visitor" do
       expect(page).to have_content(comment)
     end
   end
+
+  it "successfully creates a reply" do
+    login(user)
+    create_reply(reply)
+    expect(page).to have_content(reply)
+  end
 end

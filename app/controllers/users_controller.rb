@@ -55,12 +55,4 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
-
-  def admin_user
-    current_user.admin == true
-  end
-
-  def not_self
-    current_user.id == params[:id]
-  end
 end

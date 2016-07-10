@@ -9,17 +9,13 @@ class CreateUserService
     BCrypt::Password.create(token, cost: cost)
   end
 
-  def self.new_token
-    SecureRandom.urlsafe_base64
-  end
-
   def initialize(user_params)
     @user = User.new(user_params)
   end
 
   def call
     if @user.save
-      token = CreateUserService.new_token
+      token = SecureRandom.urlsafe_base64
       @user.update_attributes({ activation_token: token,
                                 activation_digest: CreateUserService.digest(token)
       })

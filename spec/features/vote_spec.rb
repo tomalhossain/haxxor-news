@@ -15,7 +15,6 @@ describe "Voting" do
   context "when no votes currently made" do
 
     it "creates an upvote when a user clicks the up vote button" do
-      save_and_open_page
       expect { first('.vote-button').click_on("+1") }.to change{Vote.count}.by(1)
     end
 

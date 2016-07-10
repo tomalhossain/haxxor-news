@@ -11,7 +11,7 @@ class PasswordResetsController < ApplicationController
     if @user.present?
       token = SecureRandom.urlsafe_base64
       @user.update_attributes({ reset_token: token,
-                                reset_digest: digest(token) })
+                                reset_digest: CreateUserService.digest(token) })
       UserMailer.password_reset(@user).deliver_now
       redirect_to root_url
       flash[:message] = "Please check your email to reset your password."
@@ -31,10 +31,10 @@ class PasswordResetsController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if valid_params? && @user.update_attributes(user_params)
+    if valid_params? && @user.update_attributes(reset_params)
         flash[:success] = "Your password has been successfully reset!"
         log_in(@user)
-        redirect_to @user 
+        redirect_to @user
     else
         flash[:danger] = "You must enter a valid password and confirmation."
         render 'edit'
@@ -43,18 +43,12 @@ class PasswordResetsController < ApplicationController
 
   private
 
-  def digest(token)
-    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
-                                                  BCrypt::Engine.cost
-    BCrypt::Password.create(token, cost: cost)
-  end
-
-  def user_params
+  def reset_params
     params.require(:user).permit(:password, :password_confirmation)
   end
 
   def valid_params?
-    user_params[:password].present? && user_params[:password_confirmation].present?
+    reset_params[:password].present? && user_params[:password_confirmation].present?
   end
 
 end

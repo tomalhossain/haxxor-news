@@ -12,6 +12,7 @@ module Features
       fill_in("Add a reply", with: reply)
       save_and_open_page
       click_on("Reply")
+      save_and_open_page
     end
   end
 end
