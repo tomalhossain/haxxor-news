@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 RSpec.describe User, type: :model do
 
@@ -6,12 +6,12 @@ RSpec.describe User, type: :model do
     expect(create :user).to be_valid
   end
 
-  describe 'name' do
+  describe "name" do
     it { is_expected.to validate_length_of(:name)}
     it { is_expected.to validate_presence_of(:name) }
   end
 
-  describe 'email' do
+  describe "email" do
 
     valid_addresses = %w[viget@rox.com VIGET@rox.COM vi-GET@rox.always.now
                          viget.rox@hello.pbj i+you@we.org]
@@ -30,13 +30,13 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#password' do
+  describe "#password" do
     it {is_expected.to have_secure_password }
     it { is_expected.to validate_length_of(:password)}
     it { is_expected.to validate_presence_of(:password) }
   end
 
-  describe '#authenticated' do
+  describe "#authenticated" do
   end
 
 
