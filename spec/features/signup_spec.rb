@@ -15,7 +15,7 @@ describe "Visitor" do
     it "can successfully sign up for a new account" do
       expect { sign_up(user.name, user.email, user.password, user.password) }
                .to change { ActionMailer::Base.deliveries.count }.by(1)
-      mail = ActionMailer::Base.deliveries[0]
+      mail = ActionMailer::Base.deliveries[ActionMailer::Base.deliveries.count-1]
       expect(mail.subject).to eq("Account Activation")
       expect(mail.from[0]).to eq("noreply@haxxornews.com")
       expect(mail.to[0]).to eq(user.email)

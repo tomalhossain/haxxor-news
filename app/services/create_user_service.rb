@@ -26,7 +26,7 @@ class CreateUserService
       UserMailer.account_activation(@user).deliver_now
       true
     else
-      success = false
+      false
     end
   end
 

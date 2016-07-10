@@ -12,9 +12,11 @@
           <%= link_to pluralize(post.comments.count, 'comment'), post_path(post.id) %>
           <br>
           <% session[:back] = root_url %>
+          <div class='vote-button'>
           <%= render partial: 'vote/intro',
                      locals: { votable_type: "Post",
                                votable_id: post.id } %>
+          </div>
       </li>
       <hr>
     <% end %>

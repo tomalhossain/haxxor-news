@@ -4,7 +4,6 @@ class CommentsController < ApplicationController
   def create
     @post = Post.find(params[:comment][:post_id])
     comment = commentable.comments.build
-    binding.pry
     if !comment.update_attributes(comment_params)
       flash[:danger] = "Comment may not be empty."
     end
