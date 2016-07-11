@@ -2,11 +2,10 @@ require "spec_helper"
 
 describe "Visitor" do
 
-  let!(:user) { create :user }
-  let!(:post) { create :post }
-
-  comment = "This is a comment"
-  reply = "This is a reply"
+  let!(:user)   { create :user }
+  let!(:post)   { create :post }
+  let(:comment) { "This is a comment" }
+  let(:reply)   { "This is a reply" }
 
   context "when not logged in" do
     it "cannot create a comment and is redirected to login page" do
@@ -27,7 +26,6 @@ describe "Visitor" do
     login(user)
     create_comment(comment)
     create_reply(reply)
-    save_and_open_page
     expect(page).to have_content(reply)
   end
 end

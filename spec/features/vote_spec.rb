@@ -33,9 +33,7 @@ describe "Voting" do
     it "modifies the value of the existing upvote when a downvote is cast" do
       first('.vote-button').click_on("+1")
       vote = user.votes.first
-      first('.vote-button').click_on("-1")
-      vote = user.votes.first
-      expect(vote.value).to eq(-1)
+      expect { first('.vote-button').click_on("-1") }.to change{vote.reload.value}.by(-2)
     end
 
     it "it destroys the vote when a downvote is cast again" do
@@ -46,9 +44,7 @@ describe "Voting" do
     it "modifies the value of the existing downvote when an upvote is cast" do
       first('.vote-button').click_on("-1")
       vote = user.votes.first
-      first('.vote-button').click_on("+1")
-      vote = user.votes.first
-      expect(vote.value).to eq(1)
+      expect { first('.vote-button').click_on("+1") }.to change{vote.reload.value}.by(2)
     end
   end
 end
