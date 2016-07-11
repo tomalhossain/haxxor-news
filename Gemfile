@@ -28,6 +28,8 @@ end
 
 group :production do
   gem 'puma'
+  gem 'faker'
+
 end
 
 group :test do
