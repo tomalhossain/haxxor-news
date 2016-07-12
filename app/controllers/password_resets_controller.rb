@@ -12,7 +12,7 @@ class PasswordResetsController < ApplicationController
       token = SecureRandom.urlsafe_base64
       @user.update_attributes({ reset_token: token,
                                 reset_digest: CreateUserService.digest(token) })
-      UserMailer.password_reset(@user).deliver_now
+      #UserMailer.password_reset(@user).deliver_now
       redirect_to root_url
       flash[:message] = "Please check your email to reset your password."
     else

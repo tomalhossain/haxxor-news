@@ -19,7 +19,7 @@ class CreateUserService
       @user.update_attributes({ activation_token: token,
                                 activation_digest: CreateUserService.digest(token)
       })
-      UserMailer.account_activation(@user).deliver_now
+      #UserMailer.account_activation(@user).deliver_now
       true
     else
       false
