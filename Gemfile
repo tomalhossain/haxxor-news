@@ -13,10 +13,11 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'faker'
 
 group :development, :test do
   gem 'byebug'
-  gem 'factory_girl_rails'
+  #gem 'factory_girl_rails'
   gem 'pry'
   gem 'pry-doc'
 end
@@ -28,16 +29,13 @@ end
 
 group :production do
   gem 'puma'
-  gem 'faker'
-
 end
 
 group :test do
   gem 'database_cleaner'
-  gem 'faker'
   gem 'capybara'
   gem 'launchy'
   gem 'guard-rspec'
   gem 'shoulda-matchers'
-  gem 'rspec-rails'
+  #gem 'rspec-rails'
 end

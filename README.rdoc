@@ -1,9 +1,0 @@
-== README
-
-Haxxor-News is a link aggregator app based off of Y-combinator's well esteemed site,"Hacker News".
-
-Many of this app's functionalities are currently in the works and being tested. 
-
-The production site is currently scheduled to be in functioning order by July 4th, 2016. Stay tuned! 
-
-<tt>rake doc:app</tt>.
