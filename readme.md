@@ -2,6 +2,10 @@
 
 A mock link aggregator app based off of Y-combinator's well esteemed site,<a href="https://news.ycombinator.com/">"Hacker News"</a>, built mostly for self-educational purposes. Concepts explored in this mini project include polymorphism, recursion,
 
+This project is live at the following link:
+
+https://haxxornews.herokuapp.com/
+
 ### Overall Features
 
 1. Authentication
@@ -15,4 +19,9 @@ A mock link aggregator app based off of Y-combinator's well esteemed site,<a hre
 3. System
 
 
-### Actors/Roles
+### Running Locally
+
+1. Clone/Fork the repository.
+2. Install necessary dependenices with ```bundle install```
+3. Optional: seed database with fake records using ```rake db:setup```
+4. Run server with ```rails server```
