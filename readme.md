@@ -1,6 +1,6 @@
 ## Haxxor-News
 
-A mock link aggregator app based off of Y-combinator's well esteemed site,<a href="https://news.ycombinator.com/">"Hacker News"</a>, built mostly for self-educational purposes. Concepts explored in this mini project include polymorphism, recursion,
+A mock link aggregator app based off of Y-combinator's well esteemed site,<a href="https://news.ycombinator.com/">"Hacker News"</a>, built mostly for self-educational purposes.
 
 This project is live at the following link:
 
